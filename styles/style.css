@@ -54,6 +54,7 @@ font-size: 12px;
 #price{
 text-align: center;
 background-color: #f5f5ef;
+margin-right: 10px;
 }
 
 .button{
@@ -64,3 +65,4 @@ background-color: #f5f5ef;
 	font-size: 15px;
 	margin-left: 10px;
 }
+

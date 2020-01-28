@@ -19,20 +19,11 @@
 	<h2>Parduodami automobiliai</h2>
 
 	<div class="carsToBuy">
-
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
     
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-      <li data-target="#myCarousel" data-slide-to="4"></li>
-    </ol>
-
-	<div id="img-container">
-	    <div class="carousel-inner">
-    		<script type="text/javascript">galleryLoad();</script>
+	<div class="carousel-inner" role="listbox">
+		<div id="img-container">
+	    <script type="text/javascript">galleryLoad();</script>
 		</div>
 	</div>
 
@@ -56,6 +47,19 @@
 
 <button class="button" onclick="addNewCar();">Pridėti</button>
 </div>
+
+<script>
+	$(document).ready(function(){
+  $("#myCarousel").carousel();
+   // Enable Carousel Controls
+  $(".left").click(function(){
+    $("#myCarousel").carousel("prev");
+  });
+  $(".right").click(function(){
+    $("#myCarousel").carousel("next");
+  });
+});
+</script>
 
 </body>
 </html>
