@@ -16,9 +16,40 @@ async function galleryLoad() {
 	}
 
 }
+var Num = 1;
 
- function addNewCar() {
- 	let newItem = document.createElement('div');
- 	newItem.classList.add("carsToBuy");
- 	document.getElementById("carsList").innerHTML = newItem + `<div id="img-container"> <div class="carousel-inner"> <script type="text/javascript">` + galleryLoad(); + `</script> </div> </div>`;
- }
+async function addNewCar() {
+  const response = await fetch(
+    "https://backend.daviva.lt/API/InformacijaTestui"
+  );
+  const car = await response.json();
+  let carousel = "myCarousel" + Num;
+  let brand = `<p id="car-brand">${car.marke}</p>`;
+  let model = `<p id="car-model">Modelis: ${car.modelis}</p>`;
+  let year = `<p id="year">Metai: ${car.metai}</p>`;
+  let price = `<p id="price">${car.kaina}&#8364;</p>`;
+  $("#carsToBuy").append(
+    `<div class="allInfo"><div id="${carousel}" class="carousel slide" data-ride="carousel"><div class="carousel-inner"></div></div>` + 
+    `<div id="info">${brand}${model}${year}${price}</div></div></div>`
+  );
+
+  for (let i = 0; i < car.nuotraukos.length; i++) {
+    $(`<img src="${car.nuotraukos[i]}" alt="${car.modelis}"/>`).appendTo(
+      $("div.carousel-inner").last()
+    );
+    $("img")
+      .last()
+      .wrap('<div class="item"></div>');
+  }
+  $("div.carousel-inner")
+    .last()
+    .after(
+      `<a class="left carousel-control" href="#${carousel}" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous</span></a><a class="right carousel-control" href="#${carousel}" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next</span></a>`
+    )
+    .children()
+    .first()
+    .addClass("active");
+
+  console.log(Num);
+  Num++;
+}
